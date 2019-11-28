@@ -1,103 +1,45 @@
-#include<iostream>
+//posl servira para la posicion de cada letra
+//posr servira para la posicion del rango de valores
+#include <iostream>
+#include <cstring>
 using namespace std;
+
+void funcioncita(string &s);
+
 int main()
 {
-    int num;
-    cout<<"ingrese un numero: ";
-    cin>>num;
- 	if((num<1)||(num>999))
-		cout<<"Solo numeros entre 1 y 9999"<<endl;
- 	else
-  	{
-       	if(num>=900)
-		{
-			cout<<"CM";
-			num=num-900;
-		}
-      	if(num>=500)
-		{
-			cout<<"D";
-			num=num-500;
-		}
-    	if(num>=400)
-		{
-			cout<<"CD";
-			num=num-400; 
-		}
-    	if(num>=300)
-		{
-			cout<<"C";
-			num=num-100; 
-		}
-       	if(num>=200)
-		{
-			cout<<"C";
-			num=num-100; 
-		}
-       	if(num>=100)
-		{
-			cout<<"C";
-			num=num-100; 
-		}
-      	if(num>=90)
-		{
-			cout<<"XC";
-			num=num-90;
-		}
-    	if(num>=50)
-		{
-			cout<<"L";
-			num=num-50;  
-		}
-       	if(num>=40)
-		{
-			cout<<"XL";
-			num=num-40;  
-		}
-       	if(num>=30)
-		{
-			cout<<"X";
-			num=num-10;  
-		}
-       	if(num>=20)
-		{
-			cout<<"X";
-			num=num-10;  
-		}
-       	if(num>=10)
-		{
-			cout<<"X";
-			num=num-10;  
-		}
-	   	if(num>=9)
-		{
-			cout<<"IX";
-			num=num-9;   
-		}
-       	if(num>=5)
-		{
-			cout<<"V";
-			num=num-5;   
-		}
-       	if(num>=4)
-		{
-			cout<<"IV";
-			num=num-4;   
-		}
-       	if(num>=3)
-		{
-			cout<<"III";
-			num=num-3;     
-		}
-      	if(num>=2)
-		{
-		cout<<"II";
-		num=num-2;   
-		}
-      	if(num>=1) 
-		{
-			cout<<"I";
-			num=num-1;   
-		}
+    int valor[] = {1000, 500, 100, 50, 10, 5, 1};
+    string simbolo = "MDCLXVI",cadena;
+    char c;
+    int resultado=0,posl=0,posr=0,ultimovalor=0;
+    bool valido=true;
+    cout<<"Ingrese el Numero en Romano: ";
+	cin>>cadena;
+    funcioncita(cadena);
+    while(valido && (posl < cadena.length()))
+    {
+        c = cadena[posl];
+        posr = simbolo.find(c);
+        if(posr>=0)
+        {
+            resultado += valor[posr];
+            if(valor[posr] > ultimovalor)
+            {
+                resultado -= 2 * ultimovalor;
+            }
+            ultimovalor = valor[posr];
+        }
+        else
+        {
+            valido = false;
+            resultado = -1;
+        }
+        posl++;
     }
+    cout<<"Resultado: "<<resultado<<endl;
+}
+void funcioncita(string &s)
+{
+    for(int i=0; i<s.length();i++)
+        s[i] = toupper(s[i]);
 }
