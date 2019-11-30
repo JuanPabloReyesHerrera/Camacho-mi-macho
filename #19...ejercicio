@@ -1,0 +1,46 @@
+#include<iostream>
+using namespace std;
+#include<string>
+#include<cstdlib>
+
+//#19...ejercicio
+
+//_________________________________________Juan Pablo Reyes Herrera__________________________________
+
+int main() {
+	cout << "Ingrese la cantidad de datos a ingresar\n";
+	int size;
+	cin >> size;
+	int* vector;
+	vector = new int[size];
+	cout << "Ingrese los valores\n";
+	for (int i = 0; i < size; i++) {
+		cin >> vector[i];
+	}
+	int aux = 0;
+	int c = 0;
+	
+	while (true) {
+		int a, b;
+		a = vector[c];
+		b = vector[c + 1];
+		if (a < b) {
+			vector[c] = b;
+			vector[c + 1] = a;
+			c = 0;
+			aux = 0;
+		}
+		else
+			aux++;
+		if (aux > size)
+			break;
+		c++;
+	}
+	cout << "Su lista es:\n";
+	for (int i = 0; i < size; i++) {
+		cout << vector[i] << endl;
+	}
+	delete[] vector;
+	system("pause");
+	return 0;	
+}
