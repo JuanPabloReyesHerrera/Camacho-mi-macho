@@ -1,0 +1,70 @@
+#include <stdio.h> 
+#include <iostream>
+using namespace std;
+void mostrar_calendario(unsigned long dias, int n)
+{
+       int i, fila=5, columna, k;
+
+       printf("\tDomingo  Lunes  Martes  Miercoles  Jueves  Viernes  Sabado\n");
+
+       for(i=1; i <= n; i++, dias++)
+      {
+            k=dias % 7; /* Divide dias entre 7, el residuo da el dia actual */
+            printf("\t  %d", i); /* Muestra el dia */
+
+             if(k==6) /* Si el dia es Sabado salta una linea */
+                printf("\n");
+       }
+}
+void calendario(int anio, int mes)
+{
+    /* Numero de dias desde 1/1/1900 al anio y mes actual */
+    unsigned long dias=0; 
+
+     int i;
+
+     for(i=1900;i<anio;i++)
+     {
+          if(i%4==0) /* Si es bisiesto agrega 366 dias */
+             dias+=366;
+           else /* caso contrario 365 dias */
+             dias+=365;
+     }
+
+     for(i=1;i<mes;i++)
+     {
+           /* Para Enero,Marzo,...,Diciembre cuenta 31 dias */     
+           if(i==1||i==3||i==5||i==7||i==8||i==10||i==12) 
+              dias+=31;
+           /* Para Abril,Junio,Septiembre,Noviembre cuenta 30 dias */
+           else if(i==4||i==6||i==9||i==11) 
+              dias+=30;
+           /* Si es Febrero y bisiesto cuenta 29 dias */           
+           else if(i==2 && anio%4==0) 
+              dias+=29;
+           /* Si es Febrero y no es bisiesto cuenta 28 dias */
+           else 
+              dias+=28;
+      }
+
+      if(i==1||i==3||i==5||i==7||i==8||i==10||i==12)
+         mostrar_calendario(dias, 31); /* Calendario con 31 dias */
+      else if(i==4||i==6||i==9||i==11)
+         mostrar_calendario(dias, 30); /* Calendario con 30 dias */
+      else if(i==2 && anio%4==0)
+         mostrar_calendario(dias, 29); /* Calendario con 29 dias */
+      else
+         mostrar_calendario(dias, 28 ) ; /* Calendario con 28 dias */
+}
+int main ()
+{
+    int a, m;
+    cout << "Ingresa el año: " << endl;
+    cin >> a;
+    cout<< "ingrese el mes: " << endl;
+    cin >> m;
+    calendario(a, m);
+    getchar();
+    
+    return 0;
+} 
